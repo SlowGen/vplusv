@@ -1,0 +1,10 @@
+theme:
+  password: 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
+  theme_id: "123482210477"
+  store: kali-linn-code-challenge.myshopify.com
+  ignore_files:
+    - settings_data.json
+    - src
+    - node_modules
+    - package.json
+    - package-lock.json
