@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import getAllProducts from '../graphql/collection-starter-code';
+import {Grid} from '@material-ui/core';
 
 import ProductCard from './ProductCard'
 
@@ -30,9 +31,14 @@ const Collection = () => {
                 <option>Price Low to High</option>
                 <option>Price High to Low</option>
             </select>
-            {products.map(item =>
-                <ProductCard item={item} key={item.id} />
+            <Grid container={true} direction="row" justify="center" 
+                alignItems="center" spacing={2}>
+                {products.map(item =>
+                    <Grid item={true} sm={12} md={6} lg={3} key={item.id} >
+                        <ProductCard item={item} />
+                    </Grid>
                 )}
+            </Grid>
         </div>
     )
 }

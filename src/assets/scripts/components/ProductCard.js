@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import '../../styles/templates/collection.scss'
 
 const ProductCard = (props) => {
     const {item} = props
@@ -10,7 +11,7 @@ const ProductCard = (props) => {
     return(
     <div>
         <div className="product-image">
-            <img src={image} />
+            <img src={image} width={200} />
         </div>
         <div>
             {title}
