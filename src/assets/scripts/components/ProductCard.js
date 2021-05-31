@@ -58,7 +58,7 @@ const ProductCard = (props) => {
             {comparePrice ?
                 (
                     <div id="pricebox">
-                        <s>{price}</s><span id="discount">{comparePrice}</span>
+                        <s>{comparePrice}</s><span id="discount">{price}</span>
                     </div>
                 ) : (
                     <div>
