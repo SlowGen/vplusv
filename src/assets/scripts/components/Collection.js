@@ -31,10 +31,10 @@ const Collection = () => {
                 <option>Price Low to High</option>
                 <option>Price High to Low</option>
             </select>
-            <Grid container={true} direction="row" justify="center" 
+            <Grid container direction="row" justify="center" align="center"
                 alignItems="center" spacing={2}>
                 {products.map(item =>
-                    <Grid item={true} sm={12} md={6} lg={3} key={item.id} >
+                    <Grid item sm={12} md={6} lg={3} key={item.id} >
                         <ProductCard item={item} />
                     </Grid>
                 )}

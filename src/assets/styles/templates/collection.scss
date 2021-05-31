@@ -1,1 +1,54 @@
 // your code here
+#discount {
+    color: red;
+    margin-left: 10px;
+}
+
+#pricebox {
+    display: flex;
+    justify-content: center;
+}
+
+.colors {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+#Blue {
+    background-color: #00BCD3;
+}
+
+#Red {
+    background-color: #EF5350;
+}
+
+#Gold {
+    background-color: #FEC109;
+} 
+
+#Brown {
+    background-color: #AF806E
+} 
+
+#Medium-Grey {
+
+    background-color: #CDCDCD
+} 
+
+#Navy {
+    background-color: #2F3676;
+} 
+
+#Yellow {
+    background-color: #FEC109;
+} 
+
+#Dark-Wash {
+    background-color: #2F3676
+} 
+
+#Light-Wash {
+    background-color: #00BCD3
+} 
