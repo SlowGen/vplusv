@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ButtonBase} from '@material-ui/core';
+import {ToggleButtonGroup, ToggleButton} from '@material-ui/lab' 
 
 import '../../styles/templates/collection.scss'
 
@@ -9,12 +9,11 @@ const ProductCard = (props) => {
     const {title, variants, options} = item;
     const [colors, setColors] = useState([]);
     const [images, setImages] = useState([]);
-
     const [index, setIndex] = useState(0);
     const [image, setImage] = useState(variants[index].image.src);
     const [price, setPrice] = useState(variants[index].price);
     const [comparePrice, setComparePrice] = useState(variants[index].compareAtPrice);
-    const [selected, setSelected] = useState('unselected')
+    const [selectedSwatch, setSelectedSwatch] = useState('')
     const colorMap = new Map([['Blue', 'blue'], ['Red', 'red'], ['Gold', 'gold'], ['Brown', 'brown'], 
         ['Medium Grey', 'mediumgrey'], ['Navy', 'navy'], ['Navy Blue', 'navy'], 
         ['Yellow', 'yellow'], ['Dark Wash', 'darkwash'], ['Light Wash', 'lightwash']])
@@ -36,14 +35,16 @@ const ProductCard = (props) => {
 
     useEffect(() => {
         setupImagesAndColors();
+        setSelectedSwatch(colors[0]);
     }, [])
 
-    const handleClick = (swatch) => {
+    const handleChange = (event, swatch) => {
         const indx = colors.findIndex(color => color === swatch)
+        setSelectedSwatch(swatch)
         setIndex(indx)
         setImage(images[indx]);
-        // setPrice();   ----not set up to change accurately yet
-        // setComparePrice(); ---not set up to change accurately yet
+        setPrice(variants[index].price);   //not set up to change accurately yet
+        setComparePrice(variants[index].compareAtPrice); //not set up to change accurately yet
     }
 
     return(
@@ -67,14 +68,14 @@ const ProductCard = (props) => {
                 )
             }
         </div>
-        <div>
+        <ToggleButtonGroup  exclusive value={selectedSwatch} onChange={handleChange}>
             {colors.map(swatch =>
-            <ButtonBase key={swatch} onClick={() => handleClick(swatch)} value="index" size="small" className="swatches" >
-                <span id={swatch} className={selected} key={swatch}></span>
-            </ButtonBase>
+            <ToggleButton key={swatch} value={swatch} size="small" className="swatches">
+                <span id={swatch} className="color-bar" key={swatch}></span>
+            </ToggleButton>
                 
                 )}
-        </div>
+        </ToggleButtonGroup>
     </div>
     )
 }

@@ -20,7 +20,7 @@ const Collection = () => {
     }, []
     )
     console.log('data', products)
-    const handleSelector = () => {console.log('none')}
+    const handleSelector = () => {console.log('This is on the TODO list!')}
     return(
         <div>
             <select className="input--dropdown" onChange={handleSelector}>

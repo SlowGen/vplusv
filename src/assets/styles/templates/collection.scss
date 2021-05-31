@@ -9,23 +9,17 @@
     justify-content: center;
 }
 
-.unselected {
+.color-bar {
     height: 25px;
     width: 25px;
     border-radius: 50%;
-    display: inline-block;
-}
-
-.selected {
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    border-color: black;
     display: inline-block;
 }
 
 .swatches {
-    width: 25px;
+    width: 40px;
+    border-radius: 50%;
+    border-color: black;
 }
 
 #blue {
