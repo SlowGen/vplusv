@@ -50,7 +50,7 @@ const ProductCard = (props) => {
     return(
     <div>
         <div>
-            <img src={image} width={200} />
+            <img src={image} width={100} />
         </div>
         <div>
             {title}
