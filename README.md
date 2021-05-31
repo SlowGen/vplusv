@@ -1,5 +1,9 @@
 # V+V Code Challenge
 
+view deployed challenge at https://kali-linn-code-challenge.myshopify.com/collections/all
+
+Thank you!!!
+
 ## DEV OPS
 
 The dev ops configuration for this repository will be ready to go when you clone the project. This includes the config.yml which is what links your local repository to the theme you are working on in your development store. All you should need to run is the following commands and then you are ready to code!
