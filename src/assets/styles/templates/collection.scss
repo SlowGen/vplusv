@@ -9,46 +9,58 @@
     justify-content: center;
 }
 
-.colors {
+.unselected {
     height: 25px;
     width: 25px;
     border-radius: 50%;
     display: inline-block;
 }
 
-#Blue {
+.selected {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    border-color: black;
+    display: inline-block;
+}
+
+.swatches {
+    width: 25px;
+}
+
+#blue {
     background-color: #00BCD3;
 }
 
-#Red {
+#red {
     background-color: #EF5350;
 }
 
-#Gold {
+#gold {
     background-color: #FEC109;
 } 
 
-#Brown {
+#brown {
     background-color: #AF806E
 } 
 
-#Medium-Grey {
+#mediumgrey {
 
     background-color: #CDCDCD
 } 
 
-#Navy {
+#navy {
     background-color: #2F3676;
 } 
 
-#Yellow {
+#yellow {
     background-color: #FEC109;
 } 
 
-#Dark-Wash {
+#darkwash {
     background-color: #2F3676
 } 
 
-#Light-Wash {
+#lightwash {
     background-color: #00BCD3
 } 

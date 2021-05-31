@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {ButtonGroup, Button} from '@material-ui/core';
+import {ButtonBase} from '@material-ui/core';
 
-import '../../styles/templates/collection.scss';
-import Swatch from './Swatch';
+import '../../styles/templates/collection.scss'
 
 
 const ProductCard = (props) => {
@@ -12,62 +11,64 @@ const ProductCard = (props) => {
     const [image, setImage] = useState(variants[index].image.src);
     const [price, setPrice] = useState(variants[index].price);
     const [comparePrice, setComparePrice] = useState(variants[index].compareAtPrice);
-    const [inStock, setInStock] = useState(variants[index].availableForSale)
     const [colors, setColors] = useState([]);
-    const [selected, setSelected] = useState(false)
+    const [selected, setSelected] = useState('unselected')
     
-    const changeSwatch = () => {console.log('swap!')};
-
-    const getColors = () => {
+    const renameColors = () => {
+        const newColors = options[0].values
         const colorArray = []
-        if (options[0].name === 'Color') {
-            let cols = options[0].values
-            for (let col of cols) {
-                switch (col){
-                    case 'Blue':
-                        colorArray.push('blue');
-                        break;
-                    case 'Red':
-                        colorArray.push('red');
-                        break;
-                    case 'Gold':
-                        colorArray.push('gold');
-                        break;
-                    case 'Brown':
-                        colorArray.push('brown');
-                        break;
-                    case 'Medium Grey':
-                        colorArray.push('mediumgrey');
-                        break;
-                    case 'Navy':
-                        colorArray.push('navy');
-                        break;
-                    case 'Navy Blue':
-                        colorArray.push('navy');
-                        break;
-                    case 'Yellow':
-                        colorArray.push('yellow');
-                        break;
-                    case 'Dark Wash':
-                        colorArray.push('darkwash');
-                        break;
-                    case 'Light Wash':
-                        colorArray.push('lightwash');
-                        break;
-                    default:
-                        colorArray.push(col)
-                        break;
-                }
+        for (const color of newColors) {
+            switch (color){ 
+                case 'Blue': 
+                    colorArray.push('blue'); 
+                    break; 
+                case 'Red': 
+                    colorArray.push('red'); 
+                    break; 
+                case 'Gold': 
+                    colorArray.push('gold'); 
+                    break; 
+                case 'Brown': 
+                    colorArray.push('brown'); 
+                    break; 
+                case 'Medium Grey': 
+                    colorArray.push('mediumgrey'); 
+                    break; 
+                case 'Navy': 
+                    colorArray.push('navy'); 
+                    break; 
+                case 'Navy Blue': 
+                    colorArray.push('navy'); 
+                    break; 
+                case 'Yellow': 
+                    colorArray.push('yellow'); 
+                    break; 
+                case 'Dark Wash': 
+                    colorArray.push('darkwash'); 
+                    break; 
+                case 'Light Wash': 
+                    colorArray.push('lightwash'); 
+                    break; 
+                default: colorArray.push(color) 
+                    break;
             }
-            
         }
-        setColors(colorArray);
+        setColors(colorArray)
     }
 
     useEffect(() => {
-        getColors();
+        renameColors();
     }, [])
 
+    const handleClick = (swatch) => {
+        console.log(swatch)
+        // let selection = variants.find(variant => 
+        //     variant.image.src.includes(swatch)
+        // )
+        // setImage(selection.image.src);
+        // setPrice(selection.price);
+        // setComparePrice(selection.compareAtPrice);
+    }
 
     return(
     <div>
@@ -91,19 +92,12 @@ const ProductCard = (props) => {
             }
         </div>
         <div>
-            {colors.map(color => 
-                        // <span className="colors" id={color} key={color}></span>
-                    {color}
+            {colors.map(swatch =>
+            <ButtonBase key={swatch} onClick={() => handleClick(swatch)} value="index" size="small" className="swatches" >
+                <span id={swatch} className={selected}></span>
+            </ButtonBase>
+                
                 )}
-            {/* <ButtonGroup value="swatches" onChange={changeSwatch}>
-                {colors.map(swatch => {
-                    <Button value={swatch} selected={selected} >
-                        <Swatch swatch={swatch} />
-                        words
-                    </Button>
-                    }
-                )}
-            </ButtonGroup> */}
         </div>
     </div>
     )
