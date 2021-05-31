@@ -19,12 +19,13 @@ const Collection = () => {
         })()
     }, []
     )
-    console.log('data', products)
+    
     const handleSelector = () => {console.log('This is on the TODO list!')}
+
     return(
         <div>
             <select className="input--dropdown" onChange={handleSelector}>
-                <option disabled="disabled" value="">Sort</option> 
+                <option disabled="disabled" value="On the TODO List">Sort</option> 
                 <option>Newest Arrival</option>
                 <option>A - Z</option>
                 <option>Z - A</option>
@@ -34,7 +35,9 @@ const Collection = () => {
             <Grid container direction="row" justify="center" align="center"
                 alignItems="center" spacing={2}>
                 {products.map(item =>
-                    <Grid item sm={12} md={6} lg={3} key={item.id} >
+                    <Grid item sm={12} md={6} lg={3} key={item.id} >  
+                    {/* nums represent how many cols of space to use on that size screen 
+                    for each item for 12 total cols */}
                         <ProductCard item={item} />
                     </Grid>
                 )}
