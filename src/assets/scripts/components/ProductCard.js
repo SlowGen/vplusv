@@ -7,67 +7,43 @@ import '../../styles/templates/collection.scss'
 const ProductCard = (props) => {
     const {item} = props
     const {title, variants, options} = item;
+    const [colors, setColors] = useState([]);
+    const [images, setImages] = useState([]);
+
     const [index, setIndex] = useState(0);
     const [image, setImage] = useState(variants[index].image.src);
     const [price, setPrice] = useState(variants[index].price);
     const [comparePrice, setComparePrice] = useState(variants[index].compareAtPrice);
-    const [colors, setColors] = useState([]);
     const [selected, setSelected] = useState('unselected')
+    const colorMap = new Map([['Blue', 'blue'], ['Red', 'red'], ['Gold', 'gold'], ['Brown', 'brown'], 
+        ['Medium Grey', 'mediumgrey'], ['Navy', 'navy'], ['Navy Blue', 'navy'], 
+        ['Yellow', 'yellow'], ['Dark Wash', 'darkwash'], ['Light Wash', 'lightwash']])
     
-    const renameColors = () => {
-        const newColors = options[0].values
+    const setupImagesAndColors = () => {
+        const colorOptions = options[0].name === 'Color' ? options[0].values : [];
         const colorArray = []
-        for (const color of newColors) {
-            switch (color){ 
-                case 'Blue': 
-                    colorArray.push('blue'); 
-                    break; 
-                case 'Red': 
-                    colorArray.push('red'); 
-                    break; 
-                case 'Gold': 
-                    colorArray.push('gold'); 
-                    break; 
-                case 'Brown': 
-                    colorArray.push('brown'); 
-                    break; 
-                case 'Medium Grey': 
-                    colorArray.push('mediumgrey'); 
-                    break; 
-                case 'Navy': 
-                    colorArray.push('navy'); 
-                    break; 
-                case 'Navy Blue': 
-                    colorArray.push('navy'); 
-                    break; 
-                case 'Yellow': 
-                    colorArray.push('yellow'); 
-                    break; 
-                case 'Dark Wash': 
-                    colorArray.push('darkwash'); 
-                    break; 
-                case 'Light Wash': 
-                    colorArray.push('lightwash'); 
-                    break; 
-                default: colorArray.push(color) 
-                    break;
-            }
+        for (const opt of colorOptions) {
+            colorArray.push(colorMap.get(opt))
         }
-        setColors(colorArray)
+        if (colorArray.length) setColors([...colorArray])
+        
+        const imageSet = new Set();
+        for (const variant of variants) {
+            imageSet.add(variant.image.src)
+        }
+        if (imageSet.size > 0) setImages(Array.from(imageSet))
     }
 
     useEffect(() => {
-        renameColors();
+        setupImagesAndColors();
     }, [])
 
     const handleClick = (swatch) => {
-        console.log(swatch)
-        // let selection = variants.find(variant => 
-        //     variant.image.src.includes(swatch)
-        // )
-        // setImage(selection.image.src);
-        // setPrice(selection.price);
-        // setComparePrice(selection.compareAtPrice);
+        const indx = colors.findIndex(color => color === swatch)
+        setIndex(indx)
+        setImage(images[indx]);
+        // setPrice();   ----not set up to change accurately yet
+        // setComparePrice(); ---not set up to change accurately yet
     }
 
     return(
@@ -94,7 +70,7 @@ const ProductCard = (props) => {
         <div>
             {colors.map(swatch =>
             <ButtonBase key={swatch} onClick={() => handleClick(swatch)} value="index" size="small" className="swatches" >
-                <span id={swatch} className={selected}></span>
+                <span id={swatch} className={selected} key={swatch}></span>
             </ButtonBase>
                 
                 )}
