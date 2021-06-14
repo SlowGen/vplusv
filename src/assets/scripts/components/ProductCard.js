@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ToggleButtonGroup, ToggleButton} from '@material-ui/lab' 
+// import {ToggleButtonGroup, ToggleButton} from '@material-ui/lab' 
 
 import '../../styles/templates/collection.scss'
 
@@ -50,7 +50,7 @@ const ProductCard = (props) => {
     return(
     <div>
         <div>
-            <img src={image} width={100} />
+            <img src={image} width={"33%"} />
         </div>
         <div>
             {title}
@@ -68,14 +68,25 @@ const ProductCard = (props) => {
                 )
             }
         </div>
-        <ToggleButtonGroup  exclusive value={selectedSwatch} onChange={handleChange}>
+                {colors.map((swatch) => (
+                    <span key={swatch}>
+                        <input name="color-swatch" type="radio" 
+                        // checked={swatch === colors[0]}
+                            id={swatch} value={swatch} 
+                            // onChange={handleChange} 
+                            />
+                        <label htmlFor={swatch}><span className={swatch}></span></label>
+                    </span>
+                ))}
+
+        {/* <ToggleButtonGroup  exclusive value={selectedSwatch} onChange={handleChange}>
             {colors.map(swatch =>
             <ToggleButton key={swatch} value={swatch} size="small" className="swatches">
                 <span id={swatch} className="color-bar" key={swatch}></span>
             </ToggleButton>
                 
                 )}
-        </ToggleButtonGroup>
+        </ToggleButtonGroup> */}
     </div>
     )
 }
