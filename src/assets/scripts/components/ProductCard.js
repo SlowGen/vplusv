@@ -38,13 +38,16 @@ const ProductCard = (props) => {
         setSelectedSwatch(colors[0]);
     }, [])
 
-    const handleChange = (event, swatch) => {
-        const indx = colors.findIndex(color => color === swatch)
-        setSelectedSwatch(swatch)
-        setIndex(indx)
-        setImage(images[indx]);
-        setPrice(variants[index].price);   //not set up to change accurately yet
-        setComparePrice(variants[index].compareAtPrice); //not set up to change accurately yet
+    const handleChange = (swatch) => {
+        console.log('swatch', swatch)
+        if (swatch !== selectedSwatch) {
+            const indx = colors.findIndex(color => color === swatch)
+            setSelectedSwatch(swatch)
+            setIndex(indx)
+            setImage(images[indx]);
+            setPrice(variants[index].price);   //not set up to change accurately yet
+            setComparePrice(variants[index].compareAtPrice); //not set up to change accurately yet
+        } 
     }
 
     return(
@@ -71,22 +74,12 @@ const ProductCard = (props) => {
                 {colors.map((swatch) => (
                     <span key={swatch}>
                         <input name="color-swatch" type="radio" 
-                        // checked={swatch === colors[0]}
                             id={swatch} value={swatch} 
-                            // onChange={handleChange} 
+                            onChange={() => handleChange(swatch)} 
                             />
                         <label htmlFor={swatch}><span className={swatch}></span></label>
                     </span>
                 ))}
-
-        {/* <ToggleButtonGroup  exclusive value={selectedSwatch} onChange={handleChange}>
-            {colors.map(swatch =>
-            <ToggleButton key={swatch} value={swatch} size="small" className="swatches">
-                <span id={swatch} className="color-bar" key={swatch}></span>
-            </ToggleButton>
-                
-                )}
-        </ToggleButtonGroup> */}
     </div>
     )
 }
