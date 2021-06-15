@@ -35,9 +35,7 @@ const Collection = () => {
             <Grid container direction="row" justify="center" align="center"
                 alignItems="center" spacing={2}>
                 {products.map(item =>
-                    <Grid item sm={12} md={6} lg={3} key={item.id} >  
-                    {/* nums represent how many cols of space to use on that size screen 
-                    for each item for 12 total cols */}
+                    <Grid item sm={6} md={4} lg={3} key={item.id} >  
                         <ProductCard item={item} />
                     </Grid>
                 )}

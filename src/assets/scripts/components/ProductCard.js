@@ -1,59 +1,53 @@
 import React, {useState, useEffect} from 'react';
-// import {ToggleButtonGroup, ToggleButton} from '@material-ui/lab' 
 
 import '../../styles/templates/collection.scss'
 
 
 const ProductCard = (props) => {
     const {item} = props
-    const {title, variants, options} = item;
-    const [colors, setColors] = useState([]);
-    const [images, setImages] = useState([]);
-    const [index, setIndex] = useState(0);
-    const [image, setImage] = useState(variants[index].image.src);
-    const [price, setPrice] = useState(variants[index].price);
-    const [comparePrice, setComparePrice] = useState(variants[index].compareAtPrice);
-    const [selectedSwatch, setSelectedSwatch] = useState('')
-    const colorMap = new Map([['Blue', 'blue'], ['Red', 'red'], ['Gold', 'gold'], ['Brown', 'brown'], 
+    const {title, variants, options, id, createdAt} = item;
+    const price = variants[0].price;
+    const comparePrice = variants[0].compareAtPrice;
+
+    const colorTranslator = new Map([['Blue', 'blue'], ['Red', 'red'], ['Gold', 'gold'], ['Brown', 'brown'], 
         ['Medium Grey', 'mediumgrey'], ['Navy', 'navy'], ['Navy Blue', 'navy'], 
         ['Yellow', 'yellow'], ['Dark Wash', 'darkwash'], ['Light Wash', 'lightwash']])
     
-    const setupImagesAndColors = () => {
-        const colorOptions = options[0].name === 'Color' ? options[0].values : [];
-        const colorArray = []
-        for (const opt of colorOptions) {
-            colorArray.push(colorMap.get(opt))
-        }
-        if (colorArray.length) setColors([...colorArray])
+    const optionsMap = new Map();
+    for (const option of options) {
+        const key = option.name
+        let value = new Set()
         
-        const imageSet = new Set();
-        for (const variant of variants) {
-            imageSet.add(variant.image.src)
+        for (const opt of option.values) {
+            if (option.name === 'Color') value.add(colorTranslator.get(opt))
+            else value.add(opt)
         }
-        if (imageSet.size > 0) setImages(Array.from(imageSet))
+        optionsMap.set(key, value)
     }
 
-    useEffect(() => {
-        setupImagesAndColors();
-        setSelectedSwatch(colors[0]);
-    }, [])
+    const imageSet = new Set();
+    for (const variant of variants) {
+        imageSet.add(variant.image.src)
+    }
+    const colorArray = optionsMap.has('Color') ? Array.from(optionsMap.get('Color')) : ['default']
+    const imageMap = makeMapHelper(colorArray, Array.from(imageSet))
+
+    const [image, setImage] = useState(imageMap.get('default'));
+    const [selectedSwatch, setSelectedSwatch] = useState('default')
 
     const handleChange = (swatch) => {
-        console.log('swatch', swatch)
+
+        // console.log('swatch', swatch)
         if (swatch !== selectedSwatch) {
-            const indx = colors.findIndex(color => color === swatch)
             setSelectedSwatch(swatch)
-            setIndex(indx)
-            setImage(images[indx]);
-            setPrice(variants[index].price);   //not set up to change accurately yet
-            setComparePrice(variants[index].compareAtPrice); //not set up to change accurately yet
+            setImage(imageMap.get(swatch));
         } 
     }
 
     return(
     <div>
         <div>
-            <img src={image} width={"33%"} />
+            <img src={image} id={"product-image"} />
         </div>
         <div>
             {title}
@@ -62,18 +56,18 @@ const ProductCard = (props) => {
             {comparePrice ?
                 (
                     <div id="pricebox">
-                        <s>{comparePrice}</s><span id="discount">{price}</span>
+                        <s>${comparePrice}</s><span id="discount">${price}</span>
                     </div>
                 ) : (
                     <div>
-                        {price}
+                        ${price}
                     </div>
                 )
             }
         </div>
-                {colors.map((swatch) => (
-                    <span key={swatch}>
-                        <input name="color-swatch" type="radio" 
+                {colorArray.map((swatch) => (
+                    <span key={id+swatch}>
+                        <input name={title} type="radio" 
                             id={swatch} value={swatch} 
                             onChange={() => handleChange(swatch)} 
                             />
@@ -82,6 +76,17 @@ const ProductCard = (props) => {
                 ))}
     </div>
     )
+}
+
+function makeMapHelper (keyArray, valueArray) {
+    const map = new Map()
+    map.set('default', valueArray[0])
+    if (keyArray.length) {
+        for (let i=0; i<keyArray.length; i++) {
+            map.set(keyArray[i], valueArray[i])
+        }
+    }
+    return map
 }
 
 export default ProductCard
