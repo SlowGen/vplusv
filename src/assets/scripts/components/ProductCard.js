@@ -10,7 +10,7 @@ const ProductCard = (props) => {
     const {title, variants, options, id} = item;
     const price = variants[0].price;
     const comparePrice = variants[0].compareAtPrice;
-
+    const available = variants[0].availableForSale;
 
     const colorNames = new Map([['Blue', 'blue'], ['Red', 'red'], ['Gold', 'gold'], ['Brown', 'brown'], 
         ['Medium Grey', 'mediumgrey'], ['Navy', 'navy'], ['Navy Blue', 'navy'], 
@@ -55,16 +55,23 @@ const ProductCard = (props) => {
             {title}
         </div>
         <div>
-            {comparePrice ?
-                (
+            {available ?
+                comparePrice ?
+                    (
+                        <div id="pricebox">
+                            <s>${comparePrice}</s><span id="discount">${price}</span>
+                        </div>
+                    ) : (
+                        <div>
+                            ${price}
+                        </div>
+                    ) 
+                : (
                     <div id="pricebox">
-                        <s>${comparePrice}</s><span id="discount">${price}</span>
-                    </div>
-                ) : (
-                    <div>
-                        ${price}
+                        Out of Stock
                     </div>
                 )
+            
             }
         </div>
         <ToggleGroupStyled  exclusive value={selectedSwatch} onChange={handleChange} >
