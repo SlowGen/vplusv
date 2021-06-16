@@ -1,3 +1,35 @@
+#head-component {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    // background-color: grey;
+    background-image: "../../images/bg.svg"
+}
+
+#head-display {
+    align-content: center;
+    width: 100%;
+    height: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+}
+
+.text-gradient {
+    background: linear-gradient(to right, #6849e3, #00BCD3);
+    color: transparent;
+    background-clip: text;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.text-transform {
+    padding: 15px;
+    transform: rotate(20deg);
+}
+
 #discount {
     color: red;
     margin-left: 10px;

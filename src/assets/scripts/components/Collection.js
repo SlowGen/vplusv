@@ -3,6 +3,9 @@ import getAllProducts from '../graphql/collection-starter-code';
 import {Grid} from '@material-ui/core';
 
 import ProductCard from './ProductCard'
+import Header from './Header'
+
+import '../../styles/templates/collection.scss'
 
 const Collection = () => {
     const [products, setProducts] = useState([])
@@ -66,6 +69,9 @@ const Collection = () => {
     
     return(
         <div>
+            <div id="head-component">
+                <Header />
+            </div>
             <div id="sort">
                 <span>{products.length} results</span>
                 <select className="input--dropdown" onChange={handleSelector}>
