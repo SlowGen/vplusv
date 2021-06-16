@@ -61,7 +61,7 @@ const ProductCard = (props) => {
 
     const handleChange = (e, swatch) => {
         e.preventDefault();
-        if (swatch !== selectedSwatch) {
+        if (swatch !== selectedSwatch && swatch !== null) {
             setSelectedSwatch(swatch)
             setImage(imageMap.get(swatch));
         } 
