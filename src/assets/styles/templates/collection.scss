@@ -9,68 +9,11 @@
     justify-content: center;
 }
 
-$colors: (
-    blue: #00BCD3,
-    red: #EF5350,
-    gold: #FEC109,
-    brown: #AF806E,
-    mediumgrey: #CDCDCD,
-    navy: #2F3676,
-    yellow: #FEC109,
-    darkwash: #2F3676,
-    lightwash: #00BCD3
-);
-
-span {
-    @each $name, $value in $colors {
-        &.#{$name} {
-        background: $value;
-        border: 1px solid darken($value, 10%);
-        }
-    }
-}
-
-// button[type="radio"] {
-//     display: none;
-//     &:selected + label {
-//         span { 
-//             box-shadow: 0 0 0 3px white, 0 0 0 4px black;
-//             }
-//     } 
-//   }
-
-// label {
-//         display: inline-block;
-//         width: 35px;
-//         height: 35px;
-//         border-radius: 50%;
-//         cursor: pointer;
-//         &:hover {
-//         span { 
-//             transform: scale(1.15); 
-//         }
-//         }
-//     span {
-//         display: block;
-//         justify-content: space-evenly;
-//         width: 65%;
-//         height: 65%;
-//         border-radius: 50%;
-//         transition: transform .2s ease-in-out;
-//         @each $name, $value in $colors {
-//             &.#{$name} {
-//             background: $value;
-//             border: 1px solid darken($value, 10%);
-//             }
-//         }
-//     }
-//   }
-
   #product-image {
       max-width: 50%;
   }
 
-  #blue {
+#blue {
     background-color: #00BCD3;
 }
 

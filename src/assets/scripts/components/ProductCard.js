@@ -1,42 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {ToggleButtonGroup, ToggleButton} from '@material-ui/lab';
-import {withStyles} from '@material-ui/core/styles'
+import React, {useState} from 'react';
+import ToggleButtonStyled from './ToggleButton'
+import ToggleGroupStyled from './ToggleGroupStyled'
 
 import '../../styles/templates/collection.scss'
 
 
 const ProductCard = (props) => {
     const {item} = props
-    const {title, variants, options, id, createdAt} = item;
+    const {title, variants, options, id} = item;
     const price = variants[0].price;
     const comparePrice = variants[0].compareAtPrice;
 
-    const colorTranslator = new Map([['blue', '#00BCD3'], ['red', '#EF5350'], ['gold', '#FEC109'], ['brown', '#AF806E'], 
-        ['mediumgrey', '#CDCDCD'], ['navy', '#2F3676'], ['yellow', '#FEC109'], ['darkwash', '#2F3676'], ['lightwash', '#00BCD3']])
 
     const colorNames = new Map([['Blue', 'blue'], ['Red', 'red'], ['Gold', 'gold'], ['Brown', 'brown'], 
         ['Medium Grey', 'mediumgrey'], ['Navy', 'navy'], ['Navy Blue', 'navy'], 
         ['Yellow', 'yellow'], ['Dark Wash', 'darkwash'], ['Light Wash', 'lightwash']])
 
-    const CustomToggle = withStyles((swatch) => ({
-        root: {
-            boxSizing: 'content-box',
-            borderRadius: '50%',
-            borderStartEndRadius: '50%',
-            height: '35px',
-            width: '35px',
-            backgroundColor: colorTranslator.get(swatch),
-    
-        },
-        label: {
-            display: 'inline-block',
-            width: '35px',
-            height: '35px',
-            borderRadius: '50%',
-            cursor: 'pointer',
-        }
-    }))(props => <ToggleButton {...props} />)
-    
     const optionsMap = new Map();
     for (const option of options) {
         const key = option.name
@@ -57,7 +36,7 @@ const ProductCard = (props) => {
     const imageMap = makeMapHelper(colorArray, Array.from(imageSet))
 
     const [image, setImage] = useState(imageMap.get('default'));
-    const [selectedSwatch, setSelectedSwatch] = useState('default')
+    const [selectedSwatch, setSelectedSwatch] = useState(colorArray[0])
 
     const handleChange = (e, swatch) => {
         e.preventDefault();
@@ -66,7 +45,6 @@ const ProductCard = (props) => {
             setImage(imageMap.get(swatch));
         } 
     }
-
 
     return(
     <div>
@@ -89,14 +67,14 @@ const ProductCard = (props) => {
                 )
             }
         </div>
-        <ToggleButtonGroup  exclusive value={selectedSwatch} onChange={handleChange} >
+        <ToggleGroupStyled  exclusive value={selectedSwatch} onChange={handleChange} >
             {colorArray.map(swatch =>
-            <CustomToggle key={id+swatch} value={swatch} name={swatch} size="small" className='toggle' id={swatch}>
-                <span name={swatch} key={swatch} id={swatch}></span>
-            </CustomToggle>
+                <ToggleButtonStyled key={id+swatch} value={swatch} name={swatch} size="medium" id={swatch}>
+                    <span name={swatch} key={swatch} ></span>
+                </ToggleButtonStyled>
                 
-                )}
-        </ToggleButtonGroup>
+            )}
+        </ToggleGroupStyled>
     </div>
     )
 }
@@ -111,7 +89,5 @@ function makeMapHelper (keyArray, valueArray) {
     }
     return map
 }
-
-
 
 export default ProductCard
