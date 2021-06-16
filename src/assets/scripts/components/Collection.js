@@ -6,6 +6,7 @@ import ProductCard from './ProductCard'
 
 const Collection = () => {
     const [products, setProducts] = useState([])
+    
     const collectionName = 'test-collection'
     
     useEffect(() => {
@@ -16,11 +17,14 @@ const Collection = () => {
             } catch (error) {
                 console.log('error loading data', error)
             }
+            
         })()
     }, []
     )
-    
+
+
     const handleSelector = () => {console.log('This is on the TODO list!')}
+    
 
     return(
         <div>
@@ -32,11 +36,12 @@ const Collection = () => {
                 <option>Price Low to High</option>
                 <option>Price High to Low</option>
             </select>
+            
             <Grid container direction="row" justify="center" align="center"
-                alignItems="center" spacing={2}>
+            alignItems="center" spacing={2}>
                 {products.map(item =>
                     <Grid item sm={6} md={4} lg={3} key={item.id} >  
-                        <ProductCard item={item} />
+                        <ProductCard item={item}/>
                     </Grid>
                 )}
             </Grid>
