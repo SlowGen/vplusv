@@ -1,34 +1,40 @@
-#head-component {
-    display: flex;
-    align-items: center;
-    justify-items: center;
-    width: 100%;
-    // background-color: grey;
-    background-image: "../../images/bg.svg"
-}
-
 #head-display {
-    align-content: center;
     width: 100%;
     height: 25%;
     display: flex;
-    align-items: center;
     justify-content: center;
     font-size: 35px;
 }
+
+
+////////logo styling block #1 with gradient colors on logo
 
 .text-gradient {
     background: linear-gradient(to right, #6849e3, #00BCD3);
     color: transparent;
     background-clip: text;
     justify-content: space-between;
-    align-items: stretch;
+    display: inline-block;
 }
 
-.text-transform {
+.text-gradient span {
     padding: 15px;
-    transform: rotate(20deg);
 }
+
+///////logo styling block #2 with SLANTING and gradient on individual letters
+
+// .text-gradient {
+//     justify-content: space-between;
+// }
+
+// .text-transform {
+//     padding: 15px;
+//     transform: rotate(20deg);
+//     display: inline-block;
+//     background: linear-gradient(to right,#6849e3,#00bcd3);
+//     color: transparent;
+//     background-clip: text;
+// }
 
 #discount {
     color: red;
@@ -47,6 +53,7 @@
 #sort {
     display: flex;
     justify-content: space-between;
+    padding: 25px;
 }
 
 #sort span {
