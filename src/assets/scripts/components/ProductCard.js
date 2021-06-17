@@ -51,14 +51,14 @@ const ProductCard = (props) => {
         <div>
             <img src={image} id={"product-image"} />
         </div>
-        <div>
+        <div id="title">
             {title}
         </div>
-        <div>
+        <div id="pricebox">
             {available ?
                 comparePrice ?
                     (
-                        <div id="pricebox">
+                        <div>
                             <s>${comparePrice}</s><span id="discount">${price}</span>
                         </div>
                     ) : (
@@ -67,16 +67,16 @@ const ProductCard = (props) => {
                         </div>
                     ) 
                 : (
-                    <div id="pricebox">
+                    <div>
                         Out of Stock
                     </div>
                 )
             
             }
         </div>
-        <ToggleGroupStyled  exclusive value={selectedSwatch} onChange={handleChange} >
+        <ToggleGroupStyled  exclusive value={selectedSwatch} onChange={handleChange} size="small" >
             {colorArray.map(swatch =>
-                <ToggleButtonStyled key={id+swatch} value={swatch} name={swatch} size="medium" id={swatch}>
+                <ToggleButtonStyled key={id+swatch} value={swatch} name={swatch} size="small" id={swatch}>
                     <span name={swatch} key={swatch} ></span>
                 </ToggleButtonStyled>
                 

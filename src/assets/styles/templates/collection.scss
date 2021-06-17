@@ -44,10 +44,15 @@
 #pricebox {
     display: flex;
     justify-content: center;
+    font-size: small;
 }
 
 #product-image {
-    max-width: 50%;
+    max-width: 33%;
+}
+
+#title {
+    font-size: small;
 }
 
 #sort {

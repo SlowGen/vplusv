@@ -10,7 +10,7 @@ const ToggleGroupStyled = withStyles(() => ({
           '&:first-child': {
             borderRadius: '50%',
           },
-        margin: '7px'
+        margin: '7px',
     },
 }))(props => <ToggleButtonGroup {...props} />)
 
